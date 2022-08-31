@@ -2922,20 +2922,15 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   var ENEMY_SPEED = 50;
   var PLAYER_SPEED = 200;
   var insaneMode = false;
+  onKeyPress("b", burp);
   var epochTime = Date.now();
   startTime = Date.now();
-  loadSprite("bean", "sprites/bean.png");
   loadSprite("doge", "sprites/doge.jpeg");
   loadSprite("dumpsterfire", "sprites/dumpsterfire.png");
   loadSprite("jade_transparent", "sprites/jade_transparent.png");
   loadSprite("nightsky", "sprites/nightsky.png");
   loadSprite("rainbowpoop", "sprites/rainbowpoop.png");
   loadSprite("stars", "sprites/stars.png");
-  add([
-    sprite("bean"),
-    pos(80, 40),
-    area()
-  ]);
   add([
     sprite("nightsky"),
     scale(width() / 240, height() / 240)
@@ -3119,6 +3114,5 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   __name(handleMouseDown, "handleMouseDown");
   onMouseDown(handleMouseDown);
   loop(0.4, spawnEnemy);
-  onKeyPress("b", burp);
 })();
 //# sourceMappingURL=game.js.map

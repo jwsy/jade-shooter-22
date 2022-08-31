@@ -16,12 +16,18 @@ const ENEMY_SPEED = 50
 const PLAYER_SPEED = 200
 let insaneMode = false
 
+// add a kaboom on mouse click
+// onClick(() => {
+//   addKaboom(mousePos())
+// })
+
+// burp on "b"
+onKeyPress("b", burp)
 
 let epochTime = Date.now()
 startTime = Date.now()
 
 // load assets
-loadSprite("bean", "sprites/bean.png")
 loadSprite("doge", "sprites/doge.jpeg");
 loadSprite("dumpsterfire", "sprites/dumpsterfire.png");
 loadSprite("jade_transparent", "sprites/jade_transparent.png");
@@ -33,13 +39,6 @@ loadSprite("stars", "sprites/stars.png");
 ///////////////////////////////////////
 // START // Add objects
 ///////////////////////////////////////
-
-add([
-  // list of components
-  sprite("bean"),
-  pos(80, 40),
-  area(),
-])
 
 add([
   sprite("nightsky"),
@@ -98,11 +97,9 @@ keyDown("right", () => {
 
 function spawnBullet(p) {
   add([
-    // rect(2, 6),
     rect(4, 8),
     pos(p),
     origin("center"),
-    // color(0.5, 0.5, 1),
     color(127, 127, 255),
     // strings here means a tag
     "bullet",
@@ -270,10 +267,3 @@ onMouseDown(handleMouseDown);
 // spawn an enemy every period
 loop(0.4, spawnEnemy);
 
-// add a kaboom on mouse click
-// onClick(() => {
-//   addKaboom(mousePos())
-// })
-
-// burp on "b"
-onKeyPress("b", burp)
