@@ -50,17 +50,17 @@ add([
   sprite("stars"),
   scale(width() / 240, height() / 240),
   pos(0, 0),
-  "stars",
+  "stars", area(), cleanup(),
 ]);
 
 add([
   sprite("stars"),
   scale(width() / 240, height() / 240),
   pos(0, -height()),
-  "stars",
+  "stars", area(), cleanup(),
 ]);
 
-action("stars", (r) => {
+onUpdate("stars", (r) => {
   r.move(0, 32);
   if (r.pos.y >= height()) {
     r.pos.y -= height() * 2;
@@ -87,11 +87,11 @@ function movePlayerRight() {
   }
 };
 
-keyDown("left", () => {
+onKeyDown("left", () => {
   movePlayerLeft();
 });
 
-keyDown("right", () => {
+onKeyDown("right", () => {
   movePlayerRight();
 });
 
@@ -179,7 +179,7 @@ onCollide("bullet", "enemy", (b, e) => {
   }
 })
 
-keyPress(["j", "9"], () => {
+onKeyPress(["j", "9"], () => {
   spawnBullet(player.pos.sub(4, 0));
   spawnBullet(player.pos.add(4, 0));
   spawnBullet(player.pos.sub(16, 0));
@@ -192,7 +192,7 @@ keyPress(["j", "9"], () => {
   spawnBullet(player.pos.add(176, 0));
 });
 
-keyPress(["space", "up"], () => {
+onKeyPress(["space", "up"], () => {
   spawnBullet(player.pos.sub(4, 0));
   spawnBullet(player.pos.add(4, 0));
 });
@@ -251,10 +251,14 @@ function handleMouseDown() {
   }
   console.log("handleMouseDown => " + JSON.stringify([mp.x, mp.y]))
   if (mp.x < player.pos.x) {
-    movePlayerLeft();
+    if (player.pos.x > 0) {
+      player.move(-PLAYER_SPEED / 3, 0);
+    }
   }
   else if (player.pos.x < mp.x) {
-    movePlayerRight();
+    if (player.pos.x > 0) {
+      player.move(PLAYER_SPEED / 3, 0);
+    }
   }
 }
 

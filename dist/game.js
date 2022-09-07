@@ -2939,15 +2939,19 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     sprite("stars"),
     scale(width() / 240, height() / 240),
     pos(0, 0),
-    "stars"
+    "stars",
+    area(),
+    cleanup()
   ]);
   add([
     sprite("stars"),
     scale(width() / 240, height() / 240),
     pos(0, -height()),
-    "stars"
+    "stars",
+    area(),
+    cleanup()
   ]);
-  action("stars", (r) => {
+  onUpdate("stars", (r) => {
     r.move(0, 32);
     if (r.pos.y >= height()) {
       r.pos.y -= height() * 2;
@@ -2971,10 +2975,10 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
   }
   __name(movePlayerRight, "movePlayerRight");
-  keyDown("left", () => {
+  onKeyDown("left", () => {
     movePlayerLeft();
   });
-  keyDown("right", () => {
+  onKeyDown("right", () => {
     movePlayerRight();
   });
   function spawnBullet(p) {
@@ -3055,7 +3059,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       addKaboom(e.pos);
     }
   });
-  keyPress(["j", "9"], () => {
+  onKeyPress(["j", "9"], () => {
     spawnBullet(player.pos.sub(4, 0));
     spawnBullet(player.pos.add(4, 0));
     spawnBullet(player.pos.sub(16, 0));
@@ -3067,7 +3071,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     spawnBullet(player.pos.sub(176, 0));
     spawnBullet(player.pos.add(176, 0));
   });
-  keyPress(["space", "up"], () => {
+  onKeyPress(["space", "up"], () => {
     spawnBullet(player.pos.sub(4, 0));
     spawnBullet(player.pos.add(4, 0));
   });
@@ -3106,9 +3110,13 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
     console.log("handleMouseDown => " + JSON.stringify([mp.x, mp.y]));
     if (mp.x < player.pos.x) {
-      movePlayerLeft();
+      if (player.pos.x > 0) {
+        player.move(-PLAYER_SPEED / 3, 0);
+      }
     } else if (player.pos.x < mp.x) {
-      movePlayerRight();
+      if (player.pos.x > 0) {
+        player.move(PLAYER_SPEED / 3, 0);
+      }
     }
   }
   __name(handleMouseDown, "handleMouseDown");
