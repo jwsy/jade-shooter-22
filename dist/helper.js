@@ -1875,47 +1875,6 @@
     }).catch(() => console.error("failed to parse err"));
   });
   var replit = {
-    getUser() {
-      return fetch("/user").then((res) => res.json()).then((user) => {
-        if (user) {
-          return Promise.resolve(user);
-        } else {
-          return Promise.resolve(null);
-        }
-      });
-    },
-    auth() {
-      return new Promise((resolve, reject) => {
-        const authComplete = /* @__PURE__ */ __name((e) => {
-          if (e.data !== "auth_complete") {
-            resolve(null);
-            return;
-          }
-          window.removeEventListener("message", authComplete);
-          authWindow.close();
-          this.getUser().then(resolve);
-        }, "authComplete");
-        window.addEventListener("message", authComplete);
-        const w = 320;
-        const h = 480;
-        const left = screen.width / 2 - w / 2;
-        const top = screen.height / 2 - h / 2;
-        const authWindow = window.open(`https://repl.it/auth_with_repl_site?domain=${location.host}`, "_blank", `modal=yes, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${w}, height=${h}, top=${top}, left=${left}`);
-      });
-    },
-    getUserOrAuth() {
-      return new Promise((resolve, reject) => {
-        this.getUser().then((user) => {
-          if (user) {
-            resolve(user);
-          } else {
-            this.auth().then((user2) => {
-              resolve(user2);
-            });
-          }
-        });
-      });
-    },
     getData(key, def) {
       return fetch(`/db/${key}`).then((res) => res.json()).then((val) => {
         if (val == null && def !== void 0) {
