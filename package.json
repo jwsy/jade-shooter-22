@@ -1,13 +1,20 @@
 {
-	"name": "kaboom-env",
-	"dependencies": {
-		"@replit/database": "^2.0.1",
-		"esbuild": "^0.14.13",
-		"express": "^4.17.1",
-		"fs-extra": "^10.1.0",
-		"howler": "^2.2.3",
-		"kaboom": "^2000.2.9",
-		"stacktrace-js": "^2.0.2",
-		"ws": "^8.2.0"
-	}
+  "name": "kaboom-env",
+  "scripts": {
+    "start": "npm run build && serve dist",
+    "build": "node run-build.js"
+  },
+  "dependencies": {
+    "@replit/database": "^2.0.1",
+    "esbuild": "^0.14.13",
+    "express": "^4.17.1",
+    "fs-extra": "^10.1.0",
+    "howler": "^2.2.3",
+    "kaboom": "^2000.2.9",
+    "stacktrace-js": "^2.0.2",
+    "ws": "^8.2.0"
+  },
+  "devDependencies": {
+    "serve": "^14.0.1"
+  }
 }
