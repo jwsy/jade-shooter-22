@@ -2,7 +2,14 @@
   "name": "kaboom-env",
   "scripts": {
     "start": "npm run build && serve dist",
-    "build": "node run-build.js"
+    "build": "node run-build.js",
+    "dev": "nodemon"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "dist/**"
+    ],
+    "delay": 2500
   },
   "dependencies": {
     "@replit/database": "^2.0.1",
@@ -15,6 +22,7 @@
     "ws": "^8.2.0"
   },
   "devDependencies": {
+    "nodemon": "^2.0.20",
     "serve": "^14.0.1"
   }
 }
