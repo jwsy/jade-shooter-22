@@ -5112,10 +5112,10 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       console.debug("handleMouseDown => " + JSON.stringify([mp.x, mp.y]));
       if (mp.x < player.pos.x) {
         if (player.pos.x > 0) {
-          player.move(-PLAYER_SPEED / 3, 0);
+          player.move(-PLAYER_SPEED / 1.2, 0);
         }
       } else if (player.pos.x < mp.x) {
-        player.move(PLAYER_SPEED / 3, 0);
+        player.move(PLAYER_SPEED / 1.2, 0);
       }
     }
     __name(handleMouseDown, "handleMouseDown");
