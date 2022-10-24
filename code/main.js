@@ -301,11 +301,11 @@ scene("game", () => {
     console.debug("handleMouseDown => " + JSON.stringify([mp.x, mp.y]))
     if (mp.x < player.pos.x) {
       if (player.pos.x > 0) {
-        player.move(-PLAYER_SPEED / 3, 0);
+        player.move(-PLAYER_SPEED / 1.2, 0);
       }
     }
     else if (player.pos.x < mp.x) {
-      player.move(PLAYER_SPEED / 3, 0);
+      player.move(PLAYER_SPEED / 1.2, 0);
     }
   }
 
