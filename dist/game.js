@@ -5115,9 +5115,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
           player.move(-PLAYER_SPEED / 3, 0);
         }
       } else if (player.pos.x < mp.x) {
-        if (player.pos.x > 0) {
-          player.move(PLAYER_SPEED / 3, 0);
-        }
+        player.move(PLAYER_SPEED / 3, 0);
       }
     }
     __name(handleMouseDown, "handleMouseDown");

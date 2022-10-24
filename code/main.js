@@ -305,9 +305,7 @@ scene("game", () => {
       }
     }
     else if (player.pos.x < mp.x) {
-      if (player.pos.x > 0) {
-        player.move(PLAYER_SPEED / 3, 0);
-      }
+      player.move(PLAYER_SPEED / 3, 0);
     }
   }
 
