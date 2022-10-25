@@ -5104,7 +5104,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     function handleMouseDown() {
       let mp = mousePos();
       mousePosText.text = "mpos: " + JSON.stringify(mp);
-      var curTime = Date.now();
+      let curTime = Date.now();
       if (curTime - epochTime > 100) {
         epochTime = curTime;
         spawnBullet(player.pos);

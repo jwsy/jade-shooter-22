@@ -293,7 +293,7 @@ scene("game", () => {
     // console.log("updateMousePosText.mp: ", JSON.stringify(mp))
     mousePosText.text = "mpos: " + JSON.stringify(mp)
     // aPosText.text = "apos: " + JSON.stringify(player.pos)
-    var curTime = Date.now()
+    let curTime = Date.now()
     if (curTime - epochTime > 100) {
       epochTime = curTime
       spawnBullet(player.pos)
@@ -301,11 +301,11 @@ scene("game", () => {
     console.debug("handleMouseDown => " + JSON.stringify([mp.x, mp.y]))
     if (mp.x < player.pos.x) {
       if (player.pos.x > 0) {
-        player.move(-PLAYER_SPEED / 1.2, 0);
+        player.move(-PLAYER_SPEED / 1.2, 0)
       }
     }
     else if (player.pos.x < mp.x) {
-      player.move(PLAYER_SPEED / 1.2, 0);
+      player.move(PLAYER_SPEED / 1.2, 0)
     }
   }
 
