@@ -5021,7 +5021,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     __name(addExplode, "addExplode");
     function spawnEnemy() {
       enemySpriteArr = ["rainbowpoop", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire"];
-      enemySprite = enemySpriteArr[Math.floor(Math.random() * 8)];
+      enemySprite = enemySpriteArr[Math.floor(Math.random() * enemySpriteArr.length)];
       return add([
         sprite(enemySprite),
         pos(rand(0, width()), 0),
@@ -5180,7 +5180,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       });
     }
     __name(addButton, "addButton");
-    addButton("Play\njade-shooter-22", 24, vec2(width() / 2, height() / 3), startGame);
+    addButton("Click to Play\njade-shooter-22", 24, vec2(width() / 2, height() / 3), startGame);
     addButton("Music by\n@b-diggs-1\nThird Street Tunnel", 14, vec2(width() / 2, height() / 3 * 2), () => {
       window.location.assign("https://soundcloud.com/b-diggs-1/third-street-tunnel?si=4c73cc55df874cfbb9721c57169d78d6");
     });
