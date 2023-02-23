@@ -3195,7 +3195,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       });
     }
     __name(addButton, "addButton");
-    addButton("Play\njade-shooter-22", 24, vec2(width() / 2, height() / 3), startGame);
+    addButton("Play\njade-shooter-22 v2.0", 24, vec2(width() / 2, height() / 3), startGame);
     addButton("Music by\n@b-diggs-1\nThird Street Tunnel", 14, vec2(width() / 2, height() / 3 * 2), () => {
       window.location.assign("https://soundcloud.com/b-diggs-1/third-street-tunnel?si=4c73cc55df874cfbb9721c57169d78d6");
     });
