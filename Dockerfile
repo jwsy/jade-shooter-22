@@ -1,4 +1,4 @@
-FROM nginxinc/nginx-unprivileged
+FROM nginxinc/nginx-unprivileged:1.23-alpine-slim
 EXPOSE 8080
 COPY dist/ /usr/share/nginx/html
 

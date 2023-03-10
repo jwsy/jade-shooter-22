@@ -10,7 +10,8 @@ kaboom({
 })
 
 // load assets
-loadSprite("doge", "sprites/doge.jpeg");
+loadSprite("beaver-balloon", "sprites/beaver-balloon.png");
+loadSprite("squirrel-defender", "sprites/squirrel-defender.png");
 loadSprite("dumpsterfire", "sprites/dumpsterfire.png");
 loadSprite("jade_transparent", "sprites/jade_transparent.png");
 loadSprite("nightsky", "sprites/nightsky.png");
@@ -87,8 +88,8 @@ scene("game", () => {
   });
 
   const player = add([
-    sprite("jade_transparent"),
-    // sprite("doge"),
+    sprite("squirrel-defender"),
+    scale(.2,.3),
     pos(width() / 2, height() - 16),
     origin("center"),
     "player"
@@ -158,8 +159,8 @@ scene("game", () => {
   }
 
   function spawnEnemy() {
-    enemySpriteArr = ["rainbowpoop", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire"]
-    enemySprite = enemySpriteArr[Math.floor(Math.random() * 8)]
+    enemySpriteArr = ["rainbowpoop", "dumpsterfire", "dumpsterfire","dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "beaver-balloon", "beaver-balloon"]
+    enemySprite = enemySpriteArr[Math.floor(Math.random() * enemySpriteArr.length)]
     return add([
       sprite(enemySprite),
       pos(rand(0, width()), 0),
@@ -325,7 +326,8 @@ scene("start", () => {
   });
 
   const player = add([
-    sprite('jade_transparent'),
+    sprite('squirrel-defender'),
+    scale(.3,.3),
     pos(width() / 2, height() - 16),
     origin('center'),
     'player'
@@ -366,7 +368,7 @@ scene("start", () => {
     })
   }
 
-  addButton("Play\njade-shooter-22 v2.0.0", 24, vec2(width() / 2, height() / 3), startGame)
+  addButton("CLICK HERE to Play\nDumpsterfire\nBrigade 0.0.1", 24, vec2(width() / 2, height() / 3), startGame)
   addButton("Music by\n@b-diggs-1\nThird Street Tunnel", 14, vec2(width() / 2, height() / 3 * 2), () => {
     window.location.assign('https://soundcloud.com/b-diggs-1/third-street-tunnel?si=4c73cc55df874cfbb9721c57169d78d6')
   })
