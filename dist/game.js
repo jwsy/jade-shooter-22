@@ -2967,7 +2967,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     });
     const player = add([
       sprite("squirrel-defender"),
-      scale(0.2, 0.3),
+      scale(0.3, 0.3),
       pos(width() / 2, height() - 16),
       origin("center"),
       "player"
@@ -3035,7 +3035,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
     __name(addExplode, "addExplode");
     function spawnEnemy() {
-      enemySpriteArr = ["rainbowpoop", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "beaver-balloon", "beaver-balloon"];
+      enemySpriteArr = ["rainbowpoop", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "rainbowpoop", "beaver-balloon"];
       enemySprite = enemySpriteArr[Math.floor(Math.random() * enemySpriteArr.length)];
       return add([
         sprite(enemySprite),
@@ -3198,7 +3198,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       });
     }
     __name(addButton, "addButton");
-    addButton("CLICK HERE to Play\nDumpsterfire\nBrigade 0.0.1", 24, vec2(width() / 2, height() / 3), startGame);
+    addButton("CLICK HERE to Play\nDumpsterfire\nBrigade 0.0.2", 24, vec2(width() / 2, height() / 3), startGame);
     addButton("Music by\n@b-diggs-1\nThird Street Tunnel", 14, vec2(width() / 2, height() / 3 * 2), () => {
       window.location.assign("https://soundcloud.com/b-diggs-1/third-street-tunnel?si=4c73cc55df874cfbb9721c57169d78d6");
     });
