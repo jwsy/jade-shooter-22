@@ -1,6 +1,6 @@
 # JADE Shooter '22
 
-A quick custom top‑down shooter built with [kaboom.js](https://kaboomjs.com/) and designed to be hacked on in the browser. Fly your jade shard through waves of goofy foes, rack up points, and tweak sprites or logic to make the game your own.
+A quick custom top‑down shooter built with [kaboom.js](https://kaboomjs.com/) and designed to be hacked on in the browser per this article <https://javascript.plainenglish.io/kaboom-js-repl-it-custom-top-down-shooter-in-5-min-ebad8157073a>. Fly your jade shard through waves of goofy foes, rack up points, and tweak sprites or logic to make the game your own.
 
 - **Play now:** https://jade-shooter-22.netlify.app
 - **Original repl:** https://replit.com/@jwsy/jade-shooter-22
