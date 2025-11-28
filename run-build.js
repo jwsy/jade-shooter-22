@@ -7,7 +7,16 @@ const fs = require("fs");
 const fse = require("fs-extra");
 const path = require("path");
 const esbuild = require("esbuild");
+const { execSync } = require("child_process");
 let err = null;
+
+function getVersion() {
+        try {
+                return execSync("git describe --tags --abbrev=0").toString().trim();
+        } catch (e) {
+                return execSync("git rev-parse --short HEAD").toString().trim();
+        }
+}
 
 // build user game
 function buildGame() {
@@ -34,24 +43,32 @@ function buildGame() {
 		}
 
 		// build user code
-		esbuild.buildSync({
-			bundle: true,
-			sourcemap: true,
-			target: "es6",
-			keepNames: true,
-			// logLevel: "silent",
-			entryPoints: ["code/main.js"],
-			outfile: "dist/game.js",
-		});
+                const version = getVersion();
 
-		esbuild.buildSync({
-			bundle: true,
-			sourcemap: true,
-			target: "es6",
-			keepNames: true,
-			entryPoints: ["helper.ts"],
-			outfile: "dist/helper.js",
-		});
+                esbuild.buildSync({
+                        bundle: true,
+                        sourcemap: true,
+                        target: "es6",
+                        keepNames: true,
+                        define: {
+                                "process.env.GAME_VERSION": JSON.stringify(version),
+                        },
+                        // logLevel: "silent",
+                        entryPoints: ["code/main.js"],
+                        outfile: "dist/game.js",
+                });
+
+                esbuild.buildSync({
+                        bundle: true,
+                        sourcemap: true,
+                        target: "es6",
+                        keepNames: true,
+                        define: {
+                                "process.env.GAME_VERSION": JSON.stringify(version),
+                        },
+                        entryPoints: ["helper.ts"],
+                        outfile: "dist/helper.js",
+                });
 		console.log("buildGame esbuild.buildSync() steps complete, game.js & helper.js built");
 
 	} catch (e) {
