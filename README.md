@@ -31,4 +31,5 @@ Then open the local URL printed to the console and start blasting.
 
 ## Build and publish
 - **GitHub Actions**: A workflow in `.github/workflows/publish-image.yml` installs dependencies, runs `node run-build.js`, and builds the Docker image with the repository `Dockerfile`. It pushes the result to GitHub Container Registry (GHCR) with tags derived from branches, git tags, and commit SHAs, plus a manually supplied tag when dispatching the workflow.
-- **Dockerfile**: The image uses an unprivileged `nginx` base that serves the built assets and exposes port `8080`.
+- **Dockerfile**: The image uses an unprivileged `nginx` base that serves the built assets and exposes port `8080`. Note that this is different from a previous image created in `docker.io/jwsy` where the exposed port was `80`.
+  - This impacts K8s manifests that referenced the previous build, for example: <https://github.com/jwsy/simplest-k8s/blob/main/jade-shooter-deployment.yaml>
