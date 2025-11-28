@@ -368,7 +368,7 @@ scene("start", () => {
     })
   }
 
-  addButton(`Play\njade-shooter-22 v${GAME_VERSION}`, 24, vec2(width() / 2, height() / 3), startGame)
+  addButton(`Play\njade-shooter-22 ${GAME_VERSION}`, 24, vec2(width() / 2, height() / 3), startGame)
   addButton("Music by\n@b-diggs-1\nThird Street Tunnel", 14, vec2(width() / 2, height() / 3 * 2), () => {
     window.location.assign('https://soundcloud.com/b-diggs-1/third-street-tunnel?si=4c73cc55df874cfbb9721c57169d78d6')
   })
