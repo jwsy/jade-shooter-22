@@ -30,6 +30,17 @@ npm run dev
 Then open the local URL printed to the console and start blasting.
 
 ## Build and publish
-- **GitHub Actions**: A workflow in `.github/workflows/publish-image.yml` installs dependencies, runs `node run-build.js`, and builds the Docker image with the repository `Dockerfile`. It pushes the result to GitHub Container Registry (GHCR) with tags derived from branches, git tags, and commit SHAs, plus a manually supplied tag when dispatching the workflow.
-- **Dockerfile**: The image uses an unprivileged `nginx` base that serves the built assets and exposes port `8080`. Note that this is different from a previous image created in `docker.io/jwsy` where the exposed port was `80`.
-  - This impacts K8s manifests that referenced the previous build, for example: <https://github.com/jwsy/simplest-k8s/blob/main/jade-shooter-deployment.yaml>
+- **GitHub Actions**: A workflow in `.github/workflows/publish-image.yml` installs dependencies, runs `node run-build.js`, and builds the Docker image with the repository `Dockerfile`. It pushes the result to GitHub Container Registry (GHCR) with tags derived from branches, git tags, and commit SHAs, plus a manually supplied tag when dispatching the workflow. Pushing a `v*` tag also creates a GitHub release automatically.
+- **Dockerfile**: The image uses an unprivileged `nginx` base that serves the built assets on port `8080`. `aio off;` is injected via `nginx-aio.conf` to prevent a startup crash on kernels that don't support `io_uring` (nginx 1.25+).
+
+```dockerfile
+FROM nginxinc/nginx-unprivileged
+EXPOSE 8080
+COPY dist/ /usr/share/nginx/html
+COPY nginx-aio.conf /etc/nginx/conf.d/aio.conf
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["nginx","-g","daemon off;"]
+```
+
+> **Note:** The exposed port changed from `80` to `8080` when switching to the unprivileged base image. Update any K8s manifests accordingly — see [jwsy/simplest-k8s](https://github.com/jwsy/simplest-k8s) for an example deployment.
