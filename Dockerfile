@@ -1,6 +1,7 @@
 FROM nginxinc/nginx-unprivileged
 EXPOSE 8080
 COPY dist/ /usr/share/nginx/html
+COPY nginx-aio.conf /etc/nginx/conf.d/aio.conf
 
 # FROM nginx:alpine
 # EXPOSE 80
