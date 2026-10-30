@@ -76,7 +76,7 @@ function buildGame() {
 		}
 		msg += "</pre>";
 		fs.writeFileSync("dist/index.html", msg);
-		return;
+		process.exit(1);
 	}
 
 	try {
