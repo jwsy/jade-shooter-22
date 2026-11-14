@@ -1,4 +1,4 @@
-language = "kaboom"
+modules = ["nodejs-22"]
 run = "node run.js"
 entrypoint = "code/main.js"
 
@@ -24,3 +24,12 @@ syntax = "javascript"
 
 [languages.javascript.languageServer]
 start = [ "typescript-language-server", "--stdio" ]
+
+[[ports]]
+localPort = 8000
+externalPort = 80
+
+[deployment]
+build = ["sh", "-c", "node run-build.js"]
+deploymentTarget = "static"
+publicDir = "dist"

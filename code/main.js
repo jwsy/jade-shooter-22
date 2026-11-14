@@ -1,4 +1,5 @@
 import kaboom from "kaboom"
+import { Howl } from "howler"
 
 const GAME_VERSION = process.env.GAME_VERSION || "dev"
 
@@ -21,6 +22,31 @@ loadSprite("stars", "sprites/stars.png");
 loadSound("tst-mp3", "sounds/b-diggs-1_Third_Street_Tunnel.mp3");
 loadSound("score", "sounds/score.mp3");
 
+const initHowlH = new Howl({
+  src: ['sounds/score.mp3'],
+  html5: true,
+  format: ['mp3'],
+  volume: 0.1
+})
+
+const scoreH = new Howl({
+  src: ['sounds/score.mp3'],
+  html5: true,
+  format: ['mp3'],
+  volume: 0.6
+})
+
+const tstmp3H = new Howl({
+  src: ['sounds/b-diggs-1_Third_Street_Tunnel.mp3'],
+  html5: true,
+  format: ['mp3'],
+  // autoplay: true,
+  loop: true,
+  volume: 0.8
+})
+
+
+
 scene("game", () => {
 
   const BULLET_SPEED = 640
@@ -38,15 +64,14 @@ scene("game", () => {
   // burp on "b"
   onKeyPress("b", burp)
 
-  const music = play('tst-mp3', {
-    volume: 0.7,
-    loop: true
-  })
+  // const music = play('tst-mp3', {
+  //   volume: 0.8,
+  //   loop: true
+  // })
+  tstmp3H.play()
 
   let epochTime = Date.now()
   let startTime = Date.now()
-
-
 
   // // load assets
   // loadSprite("doge", "sprites/doge.jpeg");
@@ -161,7 +186,7 @@ scene("game", () => {
 
   function spawnEnemy() {
     enemySpriteArr = ["rainbowpoop", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire", "dumpsterfire"]
-    enemySprite = enemySpriteArr[Math.floor(Math.random() * 8)]
+    enemySprite = enemySpriteArr[Math.floor(Math.random() * enemySpriteArr.length)]
     return add([
       sprite(enemySprite),
       pos(rand(0, width()), 0),
@@ -198,7 +223,8 @@ scene("game", () => {
     if (insaneMode) {
       addKaboom(e.pos)
     }
-    play('score', { volume: 0.4 })
+    // play('score', { volume: 0.2 })
+    scoreH.play()
   })
 
   onKeyPress(["j", "9"], () => {
@@ -269,7 +295,7 @@ scene("game", () => {
     // console.log("updateMousePosText.mp: ", JSON.stringify(mp))
     mousePosText.text = "mpos: " + JSON.stringify(mp)
     // aPosText.text = "apos: " + JSON.stringify(player.pos)
-    var curTime = Date.now()
+    let curTime = Date.now()
     if (curTime - epochTime > 100) {
       epochTime = curTime
       spawnBullet(player.pos)
@@ -277,13 +303,11 @@ scene("game", () => {
     console.debug("handleMouseDown => " + JSON.stringify([mp.x, mp.y]))
     if (mp.x < player.pos.x) {
       if (player.pos.x > 0) {
-        player.move(-PLAYER_SPEED / 3, 0);
+        player.move(-PLAYER_SPEED / 1.2, 0)
       }
     }
     else if (player.pos.x < mp.x) {
-      if (player.pos.x > 0) {
-        player.move(PLAYER_SPEED / 3, 0);
-      }
+      player.move(PLAYER_SPEED / 1.2, 0)
     }
   }
 
@@ -336,7 +360,8 @@ scene("start", () => {
   const startGame = () => {
     console.log('main => game')
     // for some strange reason I need to play a sound with Howler ONCE
-    // avocadoOSound.play()
+    // initHowlH.play()
+    // tstmp3H.play()
     go('game')
   }
 
@@ -368,7 +393,7 @@ scene("start", () => {
     })
   }
 
-  addButton(`Play\njade-shooter-22 ${GAME_VERSION}`, 24, vec2(width() / 2, height() / 3), startGame)
+  addButton(`Click to Play\njade-shooter-22 ${GAME_VERSION}`, 24, vec2(width() / 2, height() / 3), startGame)
   addButton("Music by\n@b-diggs-1\nThird Street Tunnel", 14, vec2(width() / 2, height() / 3 * 2), () => {
     window.location.assign('https://soundcloud.com/b-diggs-1/third-street-tunnel?si=4c73cc55df874cfbb9721c57169d78d6')
   })

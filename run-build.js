@@ -14,7 +14,11 @@ function getVersion() {
         try {
                 return execSync("git describe --tags --abbrev=0").toString().trim();
         } catch (e) {
-                return execSync("git rev-parse --short HEAD").toString().trim();
+                try {
+                        return execSync("git rev-parse --short HEAD").toString().trim();
+                } catch (e) {
+                        return "dev";
+                }
         }
 }
 
@@ -93,7 +97,7 @@ function buildGame() {
 		}
 		msg += "</pre>";
 		fs.writeFileSync("dist/index.html", msg);
-		return;
+		process.exit(1);
 	}
 
 	try {
